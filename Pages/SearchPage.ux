@@ -1,0 +1,58 @@
+<Page ux:Class="SearchPage">
+	<JavaScript File="SearchPage.js" />
+	<JavaScript File="BottomMenu.js" />
+
+    <Router ux:Dependency="router" />
+
+    <DockPanel>
+    	<Panel Height="86" Background="#fff" Dock="Top">
+    		<Rectangle Width="95%" Height="30" Margin="0,25,0,20" Fill="#E7E5DD" CornerRadius="10">
+                <TextInput Width="90%" Height="120%" Value="{word}" ux:Name="word" Alignment="Left" PlaceholderColor="#636164" PlaceholderText="검색어를 입력해 주세요" Margin="10,0,0,0" FontSize="12" />
+                <Image File="../Assets/searchicon.png" Height="80%" Margin="0,0,10,0" Clicked="{search}" Alignment="Right" />
+            </Rectangle>
+
+        </Panel>
+        <Rectangle Height="4" Color="#E7E5DD" Dock="Top"/>
+
+	        <StackPanel>
+	         	<ScrollView Alignment="VerticalCenter" Height="530">
+	                <StackPanel>
+	                    <Each Items="{allData}">
+	                        <Panel>
+	                            <Rectangle Width="95%" Height="150" Margin="0,10,0,0" Fill="#E7E5DD" CornerRadius="10">
+	                            	<Clicked Handler="{clicked}" />
+	                                <DockPanel>
+	                                    <TextView TextWrapping="Wrap">
+	                                        <Text FontSize="20" Color="#636164" Value="{Title}" Font="Bold" TextAlignment="Center" Margin="20,10,20,0" Dock="Top"/>
+	                                        <Text FontSize="15" Color="#636164" Value="{Body}" TextAlignment="Center" Margin="20,10,20,50" Dock="Top"/>
+	                                    </TextView>
+	                                    <Grid Dock="Bottom" ColumnCount="2">
+	                                        <Image File="../Assets/yesicon.png" Margin="50,0,0,10" Width="35%" />
+	                                        <Image File="../Assets/noicon.png" Margin="0,0,50,10" Width="35%" />
+	                                    </Grid>
+	                                </DockPanel>
+	                            </Rectangle>
+	                        </Panel>
+	                    </Each>
+	                </StackPanel>
+	            </ScrollView>
+		    </StackPanel>
+
+	    <BottomTab Layer="Overlay" Alignment="Bottom">
+            <Grid ColumnCount="4">
+                <Rectangle Fill="#fff" Clicked="{goToMain}">
+                    <Image File="../Assets/homeicon.png" Width="30"/>
+                </Rectangle>
+                <Rectangle Fill="#fff" Clicked="{pushWrite}">
+                    <Image File="../Assets/writeicon.png" Width="30"/>
+                </Rectangle>
+                <Rectangle Fill="#9DE2EA">
+                    <Image File="../Assets/searchicon2.png" Width="30"/>
+                </Rectangle>
+                <Rectangle Fill="#fff" Clicked="{pushMyPage}">
+                    <Image File="../Assets/mypageicon.png" Width="30"/>
+                </Rectangle>
+            </Grid>
+        </BottomTab>
+    </DockPanel>
+</Page>

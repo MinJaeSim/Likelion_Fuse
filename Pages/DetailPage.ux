@@ -1,0 +1,32 @@
+<Page ux:Class="DetailPage">
+    <JavaScript File="DetailPage.js" />
+    <JavaScript File="BottomMenu.js" />
+    <Router ux:Dependency="router" />
+
+    <DockPanel>
+        <StackPanel Dock="Top">
+            <Panel Height="45" Background="#636164">
+                <Image File="../Assets/cancelicon.png" Height="30" Margin="10,0,0,0" Clicked="{goBack}" Alignment="Left" />
+                <!-- <Image File="../Assets/writeicon2.png" Height="30" Margin="0,0,10,0" Clicked="{write}" Alignment="Right"/> -->
+            </Panel>
+            <StackPanel Orientation="Horizontal" Alignment="Left" Margin="15,15,0,0">
+                    <Text FontSize="15" TextAlignment="Left" Alignment="Left" Value="{userId}" />
+            </StackPanel>
+            <Rectangle Width="95%" Height="300" Margin="0,10,0,0" Fill="#fff" CornerRadius="10" >
+                <DropShadow Size="5" Distance="2" Spread="0.01" Color="#0005" Angle="90" />
+                <DockPanel Margin="20">
+                        <Text FontSize="25" Color="#fff" TextAlignment="Center" Alignment="Center" Value="{title}" Margin="0,0,0,0" Dock="Top"/>
+                        <Text FontSize="20" Color="#fff" TextAlignment="Center" Alignment="Center" Value="{body}" Margin="0,-100,0,0"/>
+                <Image File="../Assets/charticon.png" Clicked="{goToChart}" Width="40" Dock="Bottom"/>
+                </DockPanel>
+                <Rectangle Opacity="0.5" Fill="#000" CornerRadius="10"/> 
+                <ImageFill File="../Assets/backImage/backimage3.jpg" StretchMode="UniformToFill"/>
+            </Rectangle>
+            <WhileNotEmpty Items="{imagePath}">
+                <DockPanel Dock="Fill">
+                    <Image File="{imagePath}" />
+                </DockPanel>
+            </WhileNotEmpty>
+        </StackPanel>
+    </DockPanel>
+</Page>

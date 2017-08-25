@@ -1,0 +1,10 @@
+.uno/ux11/MainView.g.uno
+.uno/ux11/DetailPage.g.uno
+.uno/ux11/LoginPage.g.uno
+.uno/ux11/MainPage.g.uno
+.uno/ux11/MyPage.g.uno
+.uno/ux11/SearchPage.g.uno
+.uno/ux11/SignUpPage.g.uno
+.uno/ux11/SignUpPage2.g.uno
+.uno/ux11/WritePage.g.uno
+.uno/ux11/LikeLion.unoproj.g.uno

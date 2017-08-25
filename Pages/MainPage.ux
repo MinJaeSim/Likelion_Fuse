@@ -1,0 +1,173 @@
+<Page ux:Class="MainPage">
+    <JavaScript File="MainPage.js" />
+    <JavaScript File="BottomMenu.js" />
+    <Router ux:Dependency="router" />
+
+    <DockPanel>
+        <Image File="../Assets/wordlogo.png" Width="20%" Margin="0,10,0,5" Dock="Top"/>
+        <Panel  ux:Class="Tab" ClipToBounds="false" Margin="0,0,0,4" Background="#ffffff">
+            <string ux:Property="Text" />
+            <Text Value="{ReadProperty Text}" Color="#636164" Alignment="Center" />
+        </Panel>
+
+        <Rectangle ux:Name="indicator" LayoutMaster="page1Tab" Alignment="Bottom" Height="4" Color="#9DE2EA">
+            <LayoutAnimation>
+                <Move RelativeTo="WorldPositionChange" X="1" Duration="0.4" Easing="BackIn"/>
+            </LayoutAnimation>
+        </Rectangle>
+
+        <Text ux:Class="WelcomeText" FontSize="30" Alignment="Center"/>
+
+        <DockPanel>
+            <StatusBarBackground Dock="Top" />
+            <BottomBarBackground Dock="Bottom" />
+            <Grid Dock="Top" ColumnCount="3" Height="50" Background="#ffffff">
+                <Panel ux:Name="page1Tab">
+                    <Tab Text="새로운">
+                        <Clicked>
+                            <Set navigation.Active="page1" />
+                        </Clicked>
+                    </Tab>
+                </Panel>
+                <Panel ux:Name="page2Tab">
+                    <Tab Text="답변한">
+                        <Clicked>
+                            <Set navigation.Active="page2" />
+                        </Clicked>
+                    </Tab>
+                </Panel>
+                <Panel ux:Name="page3Tab">
+                    <Tab Text="질문한">
+                        <Clicked>
+                            <Set navigation.Active="page3" />
+                        </Clicked>
+                    </Tab>
+                </Panel>
+            </Grid>
+
+            <PageControl ux:Name="navigation">
+                <Page ux:Name="page1" Background="#fff">
+                    <WhileActive Threshold="0.5">
+                        <Set indicator.LayoutMaster="page1Tab" />
+                    </WhileActive>
+                    <ScrollView Alignment="VerticalCenter" Dock="Bottom" Height="100%" SnapMinTransform="false">
+                    <DockPanel>
+                    <CogWheelReload Dock="Top" />
+                        <StackPanel>
+                            <Each Items="{allData}">
+                                <Panel>
+                                    <DropShadow Size="5" Distance="2" Spread="0.01" Color="#0005" Angle="90" />
+                                    <Rectangle Width="95%" Height="150" Margin="0,10,0,0" CornerRadius="10">
+                                        <DockPanel>
+                                            <TextView TextWrapping="Wrap">
+                                                <Text FontSize="20" Color="#fff" Value="{Title}" Font="Bold" TextAlignment="Center" Margin="20,10,20,0" Dock="Top"/>
+                                                <Text FontSize="15" Color="#fff" Value="{Body}" TextAlignment="Center" Margin="20,10,20,50" Dock="Top"/>
+                                            </TextView>
+                                            <Grid Dock="Bottom" ColumnCount="2">
+                                                <Clicked Handler="{clicked}" />
+                                                <Image File="../Assets/yesicon.png" Margin="50,0,0,10" Width="35%" Clicked="{pushPro}" />
+                                                <Image File="../Assets/noicon.png" Margin="0,0,50,10" Width="35%" Clicked="{pushCon}" />
+                                            </Grid>
+                                        </DockPanel>
+                                        <Rectangle Width="100%" Height="150" Opacity="0.5" Fill="#000" CornerRadius="10"/> 
+                                        <ImageFill File="../Assets/backImage/backimage3.jpg" StretchMode="UniformToFill"/>
+                                    </Rectangle>
+                                </Panel>
+                            </Each>
+                        </StackPanel>
+                    </DockPanel>
+                    </ScrollView>
+                </Page>
+                <Page ux:Name="page2" Background="#fff">
+                    <WhileActive Threshold="0.5">
+                        <Set indicator.LayoutMaster="page2Tab" />
+                    </WhileActive>
+                    <ScrollView Alignment="VerticalCenter" Dock="Bottom" Height="100%" SnapMinTransform="false">
+                    <DockPanel>
+                    <CogWheelReload Dock="Top" />
+                        <StackPanel>
+                            <Each Items="{answerData}">
+                                <Panel>
+                                    <DropShadow Size="5" Distance="2" Spread="0.01" Color="#0005" Angle="90" />
+                                    <Rectangle Width="95%" Height="150" Margin="0,10,0,0" Fill="#E7E5DD" CornerRadius="10">
+                                        <Clicked Handler="{clicked}" />
+                                        <DockPanel>
+                                            <TextView TextWrapping="Wrap">
+                                                <Text FontSize="20" Color="#fff" Value="{Title}" Font="Bold" TextAlignment="Center" Margin="20,10,20,0" Dock="Top"/>
+                                                <Text FontSize="15" Color="#fff" Value="{Body}" TextAlignment="Center" Margin="20,10,20,50" Dock="Top"/>
+                                            </TextView>
+
+                                            <Grid Dock="Bottom" ColumnCount="2">
+                                                <Clicked Handler="{clicked}" />
+                                                <Image File="../Assets/yesicon.png" Margin="50,0,0,10" Width="35%" Clicked="{pushPro}" />
+                                                <Image File="../Assets/noicon.png" Margin="0,0,50,10" Width="35%" Clicked="{pushCon}" />
+                                            </Grid>
+                                        </DockPanel>
+                                        <Rectangle Width="100%" Height="150" Opacity="0.5" Fill="#000" CornerRadius="10"/> 
+                                        <ImageFill File="../Assets/backImage/backimage1.jpg" StretchMode="UniformToFill"/>
+                                    </Rectangle>
+                                </Panel>
+                            </Each>
+                        </StackPanel>
+                    </DockPanel>
+                    </ScrollView>
+                </Page>
+                <Page ux:Name="page3" Background="#fff">
+                    <WhileActive Threshold="0.5">
+                        <Set indicator.LayoutMaster="page3Tab" />
+                    </WhileActive>
+                    <ScrollView Alignment="VerticalCenter" Dock="Bottom" Height="100%" SnapMinTransform="false">
+                    <DockPanel>
+                    <CogWheelReload Dock="Top" />
+                        <StackPanel>
+                            <Each Items="{questionData}">
+                                <Panel>
+                                    <DropShadow Size="5" Distance="2" Spread="0.01" Color="#0005" Angle="90" />
+                                    <Rectangle Width="95%" Height="150" Margin="0,10,0,0" Fill="#E7E5DD" CornerRadius="10">
+                                        <Clicked Handler="{clicked}" />
+                                        <DockPanel>
+                                            <TextView TextWrapping="Wrap">
+                                                <Text FontSize="20" Color="#fff" Value="{Title}" Font="Bold" TextAlignment="Center" Margin="20,10,20,0" Dock="Top"/>
+                                                <Text FontSize="15" Color="#fff" Value="{Body}" TextAlignment="Center" Margin="20,10,20,50" Dock="Top"/>
+                                            </TextView>
+                                            <Grid Dock="Bottom" ColumnCount="2">
+                                                <Clicked Handler="{clicked}" />
+                                                <Image File="../Assets/yesicon.png" Margin="50,0,0,10" Width="35%" Clicked="{pushPro}" />
+                                                <Image File="../Assets/noicon.png" Margin="0,0,50,10" Width="35%" Clicked="{pushCon}" />
+                                            </Grid>
+                                        </DockPanel>
+                                        <Rectangle Width="100%" Height="150" Opacity="0.5" Fill="#000" CornerRadius="10"/> 
+                                        <ImageFill File="../Assets/backImage/backimage2.jpg" StretchMode="UniformToFill"/>
+                                    </Rectangle>
+                                </Panel>
+                            </Each>
+                        </StackPanel>
+                    </DockPanel>
+                    </ScrollView>
+                </Page>
+            </PageControl>
+        </DockPanel>
+
+        <Panel  ux:Class="BottomTab" Dock="Bottom" ClipToBounds="false" Height="50" Background="#ffffff">
+            <string ux:Property="Text" />
+            <Text Value="{ReadProperty Text}" Color="#636164" Alignment="Center" />
+        </Panel>
+        <BottomTab >
+            <Grid ColumnCount="4">
+                <Rectangle Fill="#9DE2EA">
+                    <Image File="../Assets/homeicon2.png" Width="30"/>
+                </Rectangle>
+                <Rectangle Fill="#fff" Clicked="{pushWrite}">
+                    <Image File="../Assets/writeicon.png" Width="30"/>
+                </Rectangle>
+                <Rectangle Fill="#fff" Clicked="{pushSearch}">
+                    <Image File="../Assets/Searchicon.png" Width="30"/>
+                </Rectangle>
+                <Rectangle Fill="#fff" Clicked="{pushMyPage}">
+                    <Image File="../Assets/mypageicon.png" Width="30"/>
+                </Rectangle>
+            </Grid>
+        </BottomTab>
+        
+    </DockPanel>
+</Page>

@@ -1,0 +1,94 @@
+<Chart Title="투표 결과입니다" File="-" ux:Class="DoubleBarChart" xmlns:c="Fuse.Charting">
+	<!-- <JavaScript File="ChartPage.js"/> -->
+	<JavaScript>
+			var Observable = require("FuseJS/Observable")
+			function Item( y, z, label, color ) {
+				this.y = y
+				this.z = z
+				this.label = label
+				this.color = color
+			}
+
+			var names = [ "Vebjørn", "Annbjørg",  "Øystein", "Åslaug",  "Tormod", "Borghild" ]
+			var colors = [ "#DEF", "#DFE", "#FDE", "#EDF", "#EFD", "#FED" ]
+			exports.data3 = Observable()
+			exports.data4 = Observable()
+			function create() {
+				var list = []
+				for (var i=0; i < names.length; ++i ) {
+					var c = Math.random() * 100 + 10
+					list.push( new Item( c, Math.random(), names[i], colors[i] ) )
+				}
+				return list
+			}
+
+			exports.random = function() {
+				exports.data3.replaceAll([
+					{"y":150,"z":0.8021657824103376,"label":"남자-찬성","color":"#636164"},
+					{"y":210,"z":0.8021657824103376,"label":"남자-반대","color":"#9DE2EA"},
+				])
+			}
+			exports.random()
+			exports.random = function() {
+				exports.data4.replaceAll([
+					{"y":160,"z":0.8021657824103376,"label":"여자-찬성","color":"#636164"},
+					{"y":100,"z":0.8021657824103376,"label":"여자-반대","color":"#9DE2EA"}
+				])
+			}
+
+			exports.random()
+
+		</JavaScript>
+	<ScrollView Opacity="1">
+		<StackPanel>
+		<AttractorConfig Unit="Normalized" Type="Elastic" ux:Global="pieAttract" />
+		<c:Plot Margin="40">
+			<c:DataSeries Data="{data3}" />
+
+			<Panel BoxSizing="FillAspect" Margin="30">
+				<c:PlotData>
+					<c:PlotPoint Style="Radial" PointOffset="0.05" Attractor="pieAttract">
+						<Text Value="{Plot data.label}" />
+					</c:PlotPoint>
+				</c:PlotData>
+
+				<VectorLayer HitTestMode="None">
+					<c:PlotData>
+						<!-- arcs to show Z-axis data -->
+						<Panel Width="attract({Plot data.source.z},pieAttract) * 100%" Height="attract({Plot data.source.z},pieAttract) * 100%">
+							<Arc StartAngleDegrees="attract({Plot data.accumulatedWeight.y},pieAttract)*360" EndAngleDegrees="attract({Plot data.cumulativeWeight.y},pieAttract)*360" StrokeColor="#488" StrokeWidth="2" />
+						</Panel>
+
+						<c:PlotWedge Color="{Plot data.object}.color" StrokeColor="#488" StrokeWidth="1" Attractor="pieAttract" />
+					</c:PlotData>
+				</VectorLayer>
+			</Panel>
+
+		</c:Plot>
+		<AttractorConfig Unit="Normalized" Type="Elastic" ux:Global="pieAttract2" />
+		<c:Plot Margin="40">
+			<c:DataSeries Data="{data4}" />
+
+			<Panel BoxSizing="FillAspect" Margin="30">
+				<c:PlotData>
+					<c:PlotPoint Style="Radial" PointOffset="0.05" Attractor="pieAttract">
+						<Text Value="{Plot data.label}" />
+					</c:PlotPoint>
+				</c:PlotData>
+
+				<VectorLayer HitTestMode="None">
+					<c:PlotData>
+						<!-- arcs to show Z-axis data -->
+						<Panel Width="attract({Plot data.source.z},pieAttract) * 100%" Height="attract({Plot data.source.z},pieAttract) * 100%">
+							<Arc StartAngleDegrees="attract({Plot data.accumulatedWeight.y},pieAttract)*360" EndAngleDegrees="attract({Plot data.cumulativeWeight.y},pieAttract)*360" StrokeColor="#488" StrokeWidth="2" />
+						</Panel>
+
+						<c:PlotWedge Color="{Plot data.object}.color" StrokeColor="#488" StrokeWidth="1" Attractor="pieAttract" />
+					</c:PlotData>
+				</VectorLayer>
+			</Panel>
+
+		</c:Plot>
+	</StackPanel>
+	</ScrollView>
+</Chart>

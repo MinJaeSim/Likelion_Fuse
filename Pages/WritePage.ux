@@ -1,0 +1,68 @@
+<Page ux:Class="WritePage">
+    <JavaScript File="WritePage.js" />
+    <JavaScript File="BottomMenu.js" />
+    
+    <Router ux:Dependency="router" />
+    <DockPanel>
+        <Panel Height="45" Background="#636164" Dock="Top">
+            <Image File="../Assets/cancelicon.png" Height="30" Margin="10,0,0,0" Clicked="{goBack}" Alignment="Left" />
+            <Image File="../Assets/writeicon2.png" Height="30" Margin="0,0,10,0" Clicked="{write}" Alignment="Right"/>
+        </Panel>
+        <StackPanel>
+            <Panel>
+                <Grid RowCount="2" Padding="3">
+                    <Rectangle Width="95%" Height="30" Margin="0,25,0,20" Fill="#E7E5DD" CornerRadius="10">
+                        <TextInput Width="90%" Height="120%" Value="{title}" ux:Name="title" TextWrapping="Wrap" PlaceholderColor="#636164" TextAlignment="Center" PlaceholderText="제목을 입력해 주세요" FontSize="12"/>
+                    </Rectangle>
+                </Grid>
+            </Panel>
+            <Panel>
+                <Grid RowCount="2" Padding="3">
+                    <Rectangle Width="95%" Height="200" Margin="0,30,0,0" Fill="#E7E5DD" CornerRadius="10">
+                    <TextInput Width="90%" Height="120%" TextWrapping="Wrap" Value="{contents}" TextAlignment="Center" PlaceholderColor="#636164" PlaceholderText="내용을 입력해주세요" FontSize="12"/>
+                    </Rectangle>
+                </Grid>
+            </Panel>
+
+            <Grid ColumnCount="2" Margin="212,-60,0,0">
+                <Panel>
+                    <Grid ColumnCount="2" Padding="3">
+                        <Image File="../Assets/timericon.png" Width="120%" Alignment="Right"/>
+                        <Rectangle Width="110" Height="30" Margin="0,5,0,0" Fill="#E7E5DD" CornerRadius="10" Alignment="Left">
+                            <TextInput FontSize="12" Height="100%" Value="{timer}" Alignment="Center" PlaceholderColor="#636164" PlaceholderText="시간제한(초 단위)" InputHint="Number"/>
+                        </Rectangle>
+                    </Grid>
+                </Panel>
+            </Grid>
+<!-- 
+            <WhileNotEmpty Items="{imagePath}">
+                <DockPanel Dock="Fill">
+                    <Image File="{imagePath}" StretchMode="Uniform" />
+                </DockPanel>
+            </WhileNotEmpty>     
+            <Text Value="{errorMessage}" Margin="10" Padding="10" FontSize="11" TextColor="#f44242" TextWrapping="Wrap"/>
+ -->
+            
+           <!--  <Button Text="사진 찍기" Clicked="{takePicture}" Height="60" />
+            <Button Text="앨범 고르기" Clicked="{selectPicture}" Height="60" /> -->
+
+        </StackPanel>
+
+        <BottomTab >
+            <Grid ColumnCount="4">
+                <Rectangle Fill="#fff" Clicked="{goToMain}">
+                    <Image File="../Assets/homeicon.png" Width="30"/>
+                </Rectangle>
+                <Rectangle Fill="#9DE2EA" >
+                    <Image File="../Assets/writeicon2.png" Width="30"/>
+                </Rectangle>
+                <Rectangle Fill="#fff" Clicked="{pushSearch}">
+                    <Image File="../Assets/Searchicon.png" Width="30"/>
+                </Rectangle>
+                <Rectangle Fill="#fff" Clicked="{pushMyPage}">
+                    <Image File="../Assets/mypageicon.png" Width="30"/>
+                </Rectangle>
+            </Grid>
+        </BottomTab>
+    </DockPanel>
+</Page>

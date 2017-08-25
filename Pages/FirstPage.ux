@@ -1,0 +1,57 @@
+<Page ux:Class="FirstPage"  Background="#9DE2EA">
+	<Router ux:Dependency="router" />
+    <JavaScript File="FirstPage.js" />
+
+ <DockPanel Background="#9DE2EA">
+        <Image Margin="0, 30, 0, 30" Offset="0, 100" Width="200" Dock="Top" File="../Assets/logo.png" ux:Name="myLogo" Opacity="1"/> 
+
+
+<!--         <WhileTrue ux:Name="LogoMove">
+            <Change myLogo.Offset="0, 0" Duration="3" Delay="2.0"/>
+
+        </WhileTrue>
+ -->   
+
+	<Panel ux:Class="MyLoadingIndicator" ThemeColor="#1565C0">
+
+		<float4 ux:Property="ThemeColor" />
+		<Circle ux:Name="rotatingStroke" Width="50" Height="50" StartAngleDegrees="-45" EndAngleDegrees="45">
+			<Stroke Width="2" Color="{ReadProperty ThemeColor}" />
+		</Circle>
+		<Circle Color="{ReadProperty ThemeColor}" Width="20" Height="20">
+			<Timeline ux:Name="myTimeline">
+				<Scale Factor=".5" Duration=".25" Easing="CircularOut" EasingBack="CircularIn" />
+				<Scale Factor="2" Duration=".25" Delay=".25" Easing="BounceOut" EasingBack="BounceIn" />
+			</Timeline>
+		</Circle>
+		<WhileFalse>
+			<Cycle Target="myTimeline.TargetProgress" Low="0" High="1" Frequency=".5" />
+			<Spin Target="rotatingStroke" Frequency="1" />
+		</WhileFalse>
+	</Panel>
+
+	<Panel Clicked="{startLoading}" HitTestMode="LocalBounds">
+		<Busy ux:Name="isBusy" IsActive="false" />
+		<WhileBusy>
+			<Change loadingPanel.Opacity="1" Duration="2.0" />
+			<!-- <Change LogoMove.Value = "True" /> -->
+			<Change FPText.Value = "True" />
+
+		</WhileBusy>
+		<MyLoadingIndicator ux:Name="loadingPanel" Opacity="0" ThemeColor="#fff" />
+		
+		<Text Color="#fff6" Alignment="Center" TextAlignment="Center" Margin="0,200" Offset="0, 50" ux:Name="FirstText" Opacity="1">시작하려면 아무 곳이나 터치하세요.</Text>
+
+		<Text Color="#fff6" Alignment="Center" TextAlignment="Center" Margin="0,200" Offset="0, 50" ux:Name="LoadingText" Opacity="0">접속 중입니다.</Text>
+
+		<WhileTrue ux:Name="FPText">
+			<Change FirstText.Opacity="0" Duration="1.0" />
+			<Change LoadingText.Opacity="1" Duration="1.0" Delay="0.5"/>
+
+		</WhileTrue>
+	
+	</Panel>
+</DockPanel>
+
+
+</Page>

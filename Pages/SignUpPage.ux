@@ -1,0 +1,101 @@
+<Page ux:Class="SignUpPage">
+    <JavaScript File="SignUpPage.js" />
+
+    <Router ux:Dependency="router" />
+
+    <DockPanel Background="#9DE2EA">
+        <Image Margin="0, 5, 0, 0" Width="200" Dock="Top" File="../Assets/signup.png" />
+        <StackPanel Width="92%" Padding="5" Dock="Top" Margin="0, 0, 0, 0">
+            <Grid RowCount="2" Padding="1" Offset="0, 30">
+                
+                <Text Value="Email" Alignment="Left" FontSize="18" TextColor="#FFF"/>
+                <TextInput Width="90%" Height="120%" Value="{userEmail}" ux:Name="userEmail" Alignment="Bottom" PlaceholderText="Email Address" PlaceholderColor="#FFF" Offset="0, 10"/>
+                <Rectangle Row="1" Column="0" Offset="0, 25" ColumnSpan="1" Height="1" Color="#fff" Width="350"/>
+            
+            </Grid>
+
+            <Grid RowCount="2" Padding="1" Offset="0, 80">
+                <Text Value="Password" Alignment="Left"  FontSize="18"  TextColor="#FFF"/>
+                <TextInput Width="90%" Height="120%" Value="{userPassword}" IsPassword="true" Alignment="Bottom" PlaceholderText="Password" PlaceholderColor="#FFF" Offset="0, 10"/>
+                <Rectangle Row="1" Column="0" Offset="0, 25" ColumnSpan="1" Height="1" Color="#fff" Width="350"/>
+            </Grid>     
+
+
+            <Grid RowCount="2" Padding="1" Offset="0, 130">
+                <Text Value="Password Confirm" Alignment="Left"  FontSize="18"  TextColor="#FFF"/>
+                <TextInput Width="90%" Height="120%" Value="{userConfirmPassword}" IsPassword="true" Alignment="Bottom" PlaceholderText="Password Confirm" PlaceholderColor="#FFF" Offset="0, 10"/>
+                <Rectangle Row="1" Column="0" Offset="0, 25"  ColumnSpan="1" Height="1" Color="#fff" Width="350"/>     
+            </Grid>     
+
+
+
+            <!-- <Text Value="{errorMessage}" Margin="5" Padding="5" FontSize="11" TextColor="#f44242" TextWrapping="Wrap" /> -->
+
+
+
+            <Grid Columns="1*, 1*" Offset="0, 200">
+
+                <Panel Row="2" Width="100" Height="40">
+                    <Each Items="{pages}" >
+                    <Clicked Handler="{clicked}" />
+                    </Each>                
+                    <Text ux:Name="text2" Alignment="Center" Value="Sign In" FontSize="17" Color="#636164"/>
+
+                    <Panel ux:Name="loadingCirclePanel2">
+                        <Circle ux:Name="loadingCircle2" Width="70%" Height="70%" Opacity="0" StartAngleDegrees="0" LengthAngleDegrees="90">
+                            <Stroke Width="1" Brush="#9DE2EA" />
+                        </Circle>
+                    </Panel>
+                    <Clicked>
+                        <Toggle Target="loading2" />
+                    </Clicked>
+                    <Rectangle ux:Name="rectNormalScale2" CornerRadius="30" Color="#FFF" Width="100" Height="40" />
+                    <Circle ux:Name="loadingButton2" Opacity="1" Alignment="Center" Layer="Background" Width="40" Height="40" Color="#FFFFFF">
+                        <Scaling Factor="0.25" />
+                    </Circle>
+                    <Clicked>
+                        <Toggle Target="loading2" Delay="1.0"/>
+                    </Clicked>
+                </Panel>
+                <Button Clicked="{goBack}" Height="40"> 
+                    <Text Value="뒤로가기" TextColor="#FFF" Alignment="Center" FontSize="17"/>
+                </Button>
+            </Grid>
+
+
+
+
+
+
+        <WhileTrue ux:Name="loading2">
+            <Change changeWidth2.Value="true" DelayBack="0"/>
+            <Change loadCircle2.Value="true" DelayBack="0"/>
+
+            <Change scaleAndFade2.Value="true" Delay="2.5" DelayBack="0"/>
+        </WhileTrue>
+
+        <WhileTrue ux:Name="changeWidth2">
+            <Change rectNormalScale2.Width="60" Duration=".5" DurationBack="0" Easing="CircularInOut"/>
+        </WhileTrue>
+
+        <WhileTrue ux:Name="loadCircle2">
+            <Change text2.Opacity="0" Duration="0.2" DurationBack="0"/>
+            <Change loadingCircle2.Opacity="1" Duration="0.3" Delay="0.2" DelayBack="0" DurationBack="0"/>
+            <Spin Target="loadingCircle2" Frequency="2"/>
+            <Cycle Target="loadingCircle2.LengthAngleDegrees" Low="30" High="300" Frequency="0.7" />
+        </WhileTrue>
+
+        <WhileTrue ux:Name="scaleAndFade2">
+            <Change loadingCirclePanel2.Opacity="0" Duration="0.1" />
+            <Change loadingButton2.Opacity="1" Duration="0.01" />
+            <Change rectNormalScale2.Opacity="0" Duration="0.01" />
+
+            <Scale Target="loadingButton2" Factor="3" RelativeTo="SizeFactor" RelativeNode="transitionScaleGuide2" Delay="0.01" Duration="0.7" Easing="ExponentialInOut" DurationBack="0" />
+        </WhileTrue>
+
+
+        <Panel ux:Name="transitionScaleGuide2" Width="500%" Height="500%" Alignment="Center" HitTestMode="None" BoxSizing="FillAspect" Aspect="1" />
+
+        </StackPanel>
+    </DockPanel>
+</Page>

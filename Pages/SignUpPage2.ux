@@ -1,0 +1,133 @@
+<Page ux:Class="SignUpPage2">
+    <JavaScript File="SignUpPage.js" />
+    <JavaScript File="SignUpPage2.js" />
+
+    <Router ux:Dependency="router" />
+
+        <DockPanel Background="#9DE2EA" ux:Name="{userGender}" >
+
+            <Image Margin="0, 5, 0, 0" Width="200" Dock="Top" File="../Assets/signup.png" />
+                
+            <Grid RowCount="2" Padding="1" Rows="30, 30" Columns="1*" Offset="20, 10">
+                <Text Value="NickName" Alignment="Left" FontSize="18" TextColor="#FFF" Offset="0, 10" />
+                <TextInput Width="90%" Height="120%" Value="{userNickName}" Alignment="Bottom" PlaceholderText="NickName" PlaceholderColor="#FFF" Offset="5, 10" />
+                <Rectangle Row="1" Column="0" Offset="-10, 20" ColumnSpan="1" Height="1" Color="#fff" Width="350" />                
+            </Grid>
+
+            <Grid RowCount="2" Padding="1" Rows="30, 30" Columns="80, 150, 150" Offset="20, 110">
+                <Text Value="Age" Alignment="CenterLeft" FontSize="18" TextColor="#FFF" />
+                <Text Value="Gender : " Alignment="CenterLeft" FontSize="18" TextColor="#FFF" Margin="50, 0, 0, 0" /> 
+                <Text Value="{userGender}" Alignment="CenterLeft" FontSize="18" TextColor="#FFF" Margin="-20, 0, 0, 0" /> 
+
+                <TextInput Width="90%" Height="120%" Value="{userAge}" Alignment="Bottom" PlaceholderText="Age" PlaceholderColor="#FFF" Offset="5, 10" InputHint="Number"/>
+
+
+
+                <Text Value="ASD" Alignment="Center" Opacity="0" />
+                <Panel ux:Class="MyToggle" Width="80" Height="34" PrimaryColor="#9DE2EA" SecondaryColor="#9DE2EA" Clicked="{changeValueOfToggle}">
+                    <float4 ux:Property="PrimaryColor" />
+                    <float4 ux:Property="SecondaryColor" />
+                    <bool ux:Property="IsActive" />
+                    <Text Value="{userGender}" ux:Name="userGender" Margin="100, 0, 0, 0" Opacity="0" />
+
+                    <SwipeGesture ux:Name="swipe" Length="46" Direction="Right" Type="Active" IsActive="{Property IsActive}" />
+                    <SwipingAnimation Source="swipe">
+                        <Move Target="handle" X="46" />
+                        <Change handle.Color="{ReadProperty SecondaryColor}" />
+                        <Change userGender.Value="Woman" />
+                        <Change background.Color="#FFF" />
+                    </SwipingAnimation>
+                    
+                    <Clicked>
+                        <ToggleSwipeActive Target="swipe" />
+                    </Clicked>
+                    
+                    <Rectangle ux:Name="handle" Width="28" Margin="-52, 3, 3, 3" Alignment="Left" Color="{ReadProperty PrimaryColor}" CornerRadius="2" Opacity="1">
+                        <Shadow Size="1" Distance="1" Color="#0004" Angle="0" />
+                    </Rectangle>
+                    <Rectangle ux:Name="background" Layer="Background" Color="#FFF" CornerRadius="4" Alignment="Default" Margin="-55, 0, 55, 0" Background="#0004" />
+                </Panel>
+                
+                <MyToggle ux:Name="toggle" />
+
+                    
+    <WhileTrue Value="{ReadProperty toggle.IsActive}">
+        <Change background.Color="#ecf0f1" Duration="0.2" />
+    </WhileTrue>
+    
+    <Rectangle ux:Name="background" Color="#6A397F" Opacity="0" Width="0.1" Height="0.1"/>
+
+
+                <Rectangle Row="1" Column="0" Margin="10, 35, 0, 0" ColumnSpan="1" Height="1" Color="#fff" Alignment="Left" Width="50" />                
+            </Grid>
+
+            <Grid RowCount="2" Padding="1" Rows="30, 30" Columns="1*" Offset="20, 210" >
+                <Text Value="Interest" Alignment="TopLeft" FontSize="18" TextColor="#FFF" Offset="0, 10" />
+                <TextInput Width="90%" Height="120%" Value="{userInterest}" Alignment="Bottom" PlaceholderText="Interest" PlaceholderColor="#FFF" Offset="5, 10" />
+                <Rectangle Row="1" Column="0" Offset="-10, 20" ColumnSpan="1" Height="1" Color="#fff" Width="350" />                
+            </Grid>
+
+            <Grid RowCount="2" Padding="1" Rows="30, 30" Columns="1*" Offset="20, 310">
+                <Text Value="Home" Alignment="Left" FontSize="18" TextColor="#FFF" Offset="0, 10" />
+                <TextInput Width="90%" Height="120%" Value="{userHome}" Alignment="Top" PlaceholderText="Home" PlaceholderColor="#FFF" Offset="5, 5" />
+                <Rectangle Row="1" Column="0" Offset="-10, 25" ColumnSpan="1" Height="1" Color="#fff" Width="350" />                
+            </Grid>
+
+
+
+            <Grid Columns="1*, 1*">
+                <Panel Row="2" Width="100" Height="40" Clicked="{signUp}">
+                    <Text ux:Name="text3" Alignment="Center" Value="Sign In" FontSize="17" Color="#636164" />
+
+                    <Panel ux:Name="loadingCirclePanel3">
+                        <Circle ux:Name="loadingCircle3" Width="70%" Height="70%" Opacity="0" StartAngleDegrees="0" LengthAngleDegrees="90">
+                            <Stroke Width="1" Brush="#9DE2EA" />
+                        </Circle>
+                    </Panel>
+                    <Clicked>
+                        <Toggle Target="loading3" />
+                    </Clicked>
+                    <Rectangle ux:Name="rectNormalScale3" CornerRadius="30" Color="#FFF" Width="100" Height="40" />
+                    <Circle ux:Name="loadingButton3" Opacity="1" Alignment="Center" Layer="Background" Width="40" Height="40" Color="#FFFFFF">
+                        <Scaling Factor="0.25" />
+                    </Circle>
+                    <Clicked>
+                        <Toggle Target="loading3" Delay="1.0" />
+                    </Clicked>
+                </Panel>
+                <Button Clicked="{goBack}" Height="40"> 
+                    <Text Value="뒤로가기" TextColor="#FFF" Alignment="Center" FontSize="17" />
+                </Button>
+            </Grid>
+
+
+        <WhileTrue ux:Name="loading3">
+            <Change changeWidth3.Value="true" DelayBack="0" />
+            <Change loadCircle3.Value="true" DelayBack="0" />
+
+            <Change scaleAndFade3.Value="true" Delay="2.5" DelayBack="0" />
+        </WhileTrue>
+
+        <WhileTrue ux:Name="changeWidth3">
+            <Change rectNormalScale3.Width="60" Duration=".5" DurationBack="0" Easing="CircularInOut" />
+        </WhileTrue>
+
+        <WhileTrue ux:Name="loadCircle3">
+            <Change text3.Opacity="0" Duration="0.2" DurationBack="0" />
+            <Change loadingCircle3.Opacity="1" Duration="0.3" Delay="0.2" DelayBack="0" DurationBack="0" />
+            <Spin Target="loadingCircle3" Frequency="2" />
+            <Cycle Target="loadingCircle3.LengthAngleDegrees" Low="30" High="300" Frequency="0.7" />
+        </WhileTrue>
+
+        <WhileTrue ux:Name="scaleAndFade3">
+            <Change loadingCirclePanel3.Opacity="0" Duration="0.1" />
+            <Change loadingButton3.Opacity="1" Duration="0.01" />
+            <Change rectNormalScale3.Opacity="0" Duration="0.01" />
+
+            <Scale Target="loadingButton3" Factor="3" RelativeTo="SizeFactor" RelativeNode="transitionScaleGuide3" Delay="0.01" Duration="0.7" Easing="ExponentialInOut" DurationBack="0" />
+        </WhileTrue>
+
+
+        <Panel ux:Name="transitionScaleGuide3" Width="500%" Height="500%" Alignment="Center" HitTestMode="None" BoxSizing="FillAspect" Aspect="1" />
+    </DockPanel>
+</Page>

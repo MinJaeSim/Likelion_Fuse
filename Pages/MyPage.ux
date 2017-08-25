@@ -1,0 +1,80 @@
+<Page ux:Class="MyPage">
+    <JavaScript File="MyPage.js" />
+    <JavaScript File="BottomMenu.js" />
+    
+    <Router ux:Dependency="router" />
+
+    <DockPanel Background="#FFF">
+        
+        <Image File="../Assets/wordlogo.png" Width="50%" Margin="0,30,0,0" Dock="Top" />
+        <StackPanel Margin="20" Dock="Top">
+            <Rectangle Margin="0, 10, 0, 10" Fill="#9DE2EA" CornerRadius="10" Height="300">
+                <Rectangle Fill="#9De2ea" Height="285" Width="320" CornerRadius="10">
+            <!-- <Text FontSize="40" TextAlignment="Center" Value="My Profile" Color="#9DE2EA" Margin="0, 0, 0, 50" />     -->
+            <Grid ColumnCount="2" Columns="100, 120" Margin="10">
+                <Grid RowCount="3">
+
+                    <Image File="../Assets/email.png" Width="30%" Margin="0,0,0,0" Dock="Top" X="0" Y="20" />
+                    <Image File="../Assets/mypageicon2.png" Width="30%" Margin="0,0,0,0" Dock="Top" X="0" Y="20" />
+                    
+                    <Image File="../Assets/introduction.png" Width="30%" Margin="0,0,0,0" Dock="Top" X="0" Y="20" />                    
+                </Grid>
+                <Grid RowCount="3">
+                    <Text FontSize="20" TextAlignment="Left" Alignment="Left" Value="{userEmail}" Width="150%" Y="25" Color="#FFF" X="-25" />
+                    <TextInput FontSize="20" TextAlignment="Left" PlaceholderText="Plz input your user-name here.." PlaceholderColor="#FFF" Value="{userName}" ValueChanged="{setUserName}" Margin="0, 0, 0, 0" Width="150%" Alignment="Left" X="-25" Y="25" TextColor="#FFF" />
+                    <TextInput FontSize="20" TextAlignment="Left" PlaceholderText="Your Introduction" PlaceholderColor="#FFF" Value="{userIntroduction}" ValueChanged="{setUserIntroduction}" Width="150%" Alignment="Left" Y="25" TextColor="#FFF" X="-25" />
+                </Grid>
+            </Grid>
+            <Stroke Color="#FFF" Alignment="Outside" Width="2" />
+                </Rectangle>
+            </Rectangle>
+        </StackPanel>
+
+        <WhileNotEmpty Items="{imagePath}">
+            <DockPanel Dock="Fill">
+                <Image File="{imagePath}" />
+            </DockPanel>
+        </WhileNotEmpty>
+
+        <StackPanel>   
+            <Grid ColumnCount="2" Columns="180, 180">
+                <Text Value="글 작성 수" Color="#9de2ea" X="70" FontSize="20" />
+                <Text Value="투표한 수" Color="#9de2ea" X="50" FontSize="20" />
+            </Grid>
+        </StackPanel>
+
+        <Rectangle CornerRadius="30" Color="#9de2ea" Width="80" Height="30" Alignment="Right" Clicked="{signOut}" Margin="0, 0, 0, 0" X="-20" Y="100">
+
+            <Text Value="로그아웃" Alignment="Center" Color="#FFF" /> 
+        </Rectangle>
+
+
+
+<!--             <WhileEmpty Items="{imagePath}">
+                <DockPanel Dock="Fill">
+                    <Image File="../Assets/yesicon.png" Width="50" StretchMode="Uniform" />
+                </DockPanel>
+            </WhileEmpty>
+            
+            <Button Text="사진 찍기" Clicked="{takePicture}" Height="60" />
+            <Button Text="앨범 고르기" Clicked="{selectPicture}" Height="60" />
+ -->
+
+        <BottomTab>
+            <Grid ColumnCount="4">
+                <Rectangle Fill="#fff" Clicked="{goToMain}">
+                    <Image File="../Assets/homeicon.png" Width="30" />
+                </Rectangle>
+                <Rectangle Fill="#fff" Clicked="{pushWrite}">
+                    <Image File="../Assets/writeicon.png" Width="30" />
+                </Rectangle>
+                <Rectangle Fill="#fff" Clicked="{pushSearch}">
+                    <Image File="../Assets/Searchicon.png" Width="30" />
+                </Rectangle>
+                <Rectangle Fill="#9DE2EA">
+                    <Image File="../Assets/mypageicon2.png" Width="30" />
+                </Rectangle>
+            </Grid>
+        </BottomTab>
+    </DockPanel>
+</Page>

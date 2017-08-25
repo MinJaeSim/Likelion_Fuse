@@ -1,0 +1,19 @@
+<App>
+    <Router ux:Name="router" />
+    <JavaScript File="LocalNotification.js" />
+    <Font File="./Assets/Spoqa.ttf" ux:Global="Spoqa" />
+    <ClientPanel>
+       <Navigator DefaultPath="FirstPage">
+            <FirstPage ux:Template="FirstPage" router="router" />
+            <LoginPage ux:Template="LoginPage" router="router" />
+            <MainPage ux:Template="MainPage" router="router"/>
+            <SignUpPage ux:Template="SignUpPage" router="router" />
+            <SignUpPage2 ux:Template="SignUpPage2" router="router" />
+            <WritePage ux:Template="WritePage" router="router" />
+            <MyPage ux:Template="MyPage" router="router" />
+            <SearchPage ux:Template="SearchPage" router="router" />
+            <DetailPage ux:Template="DetailPage" router="router" />
+            <ChartPage ux:Template="ChartPage" router="router" />
+        </Navigator>
+    </ClientPanel>
+</App>
